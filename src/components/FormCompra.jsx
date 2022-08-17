@@ -34,9 +34,9 @@ export default function FormCompra() {
     <form className="form-add">
       <Select
         options={products}
+        placeholder="Selecione o produto"
         onChange={(product) => {
           setNome(product.value);
-          console.log(nome);
 
           if (product.value === "pao de queijo") {
             setPrice(90);
@@ -62,7 +62,11 @@ export default function FormCompra() {
         }}
         required={true}
       />
-      <Select options={mesas} onChange={(mesa) => setReferencia(mesa.value)} />
+      <Select
+        options={mesas}
+        onChange={(mesa) => setReferencia(mesa.value)}
+        placeholder="Selecione a Mesa"
+      />
       <button onClick={comprar}>Confirmar Compra</button>
     </form>
   );

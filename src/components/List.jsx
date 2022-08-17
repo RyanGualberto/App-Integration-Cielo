@@ -23,8 +23,6 @@ export default function ListaCompras() {
         // sempre será executado
       });
   }
-  console.log(pedidos);
-
   return (
     <table className="view-pedidos">
       <tbody>
@@ -37,9 +35,12 @@ export default function ListaCompras() {
           <td>status</td>
         </tr>
 
-        {!ultimoPed.reference === null ? (
+        {!ultimoPed.reference ? (
           <tr>
-            <td>Carregando</td>
+            <td className="load">
+              Carregando ultimo pedido... Se Não Carregar tente Recarregar a
+              página
+            </td>
           </tr>
         ) : (
           <tr>
@@ -55,17 +56,22 @@ export default function ListaCompras() {
           <td>Valor</td>
           <td>status</td>
         </tr>
-        {pedidos
-          ? pedidos.map((produto, index) => {
-              return (
-                <tr key={index}>
-                  <td>{produto.reference}</td>
-                  <td>R$0,{produto.price}</td>
-                  <td>{produto.status === "PAID" ? "PAGO" : "PENDENTE"}</td>
-                </tr>
-              );
-            })
-          : null}
+        {pedidos ? (
+          pedidos.map((produto, index) => {
+            return (
+              <tr key={index}>
+                <td>{produto.reference}</td>
+                <td>R$0,{produto.price}</td>
+                <td>{produto.status === "PAID" ? "PAGO" : "PENDENTE"}</td>
+              </tr>
+            );
+          })
+        ) : (
+          <td className="load">
+            Carregando Lista De Pedidos... Se Não Carregar tente Recarregar a
+            página
+          </td>
+        )}
       </tbody>
     </table>
   );
